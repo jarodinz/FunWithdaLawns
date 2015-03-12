@@ -1,6 +1,26 @@
 ﻿Module Module1
+    Class cCompany
+        Public buisnessname As String
+        Public ownersname As String
+        Public number As String
+        Public address As String
+        Public rate As Single
+        Public totalhours As Integer
+        Public totalincome As Single
+    End Class
 
+    Dim company As New cCompany
+    Sub Companyinfo()
 
+        Console.Clear()
+
+        Console.WriteLine("Welcome " & company.buisnessname)
+        Console.WriteLine("=====================================================================")
+        Console.WriteLine("Total completed hours " & company.totalhours)
+
+        Console.WriteLine("Total Income: " & company.totalincome)
+
+    End Sub
     Class Client
 
         Public name As String
@@ -8,7 +28,7 @@
         Public phone As Integer
         Public dates As Date
         Public time As Date
-
+        Public complete As Boolean
 
     End Class
     ' Dim completedclients As New List(Of Client)
@@ -214,14 +234,20 @@
     End Sub
 
     Sub BuisnessCard()
+        Console.Clear()
+        Console.WriteLine("Owner: " & company.ownersname)
+        Console.WriteLine("Company: " & company.buisnessname)
+        Console.WriteLine("Phone Number: " & company.number)
+        Console.WriteLine("Address: " & company.address)
 
+        Console.ReadLine()
     End Sub
     Sub menu()
         Dim selection As Char
 
         Do
-
-
+            Console.Clear()
+            Companyinfo()
 
 
             Console.SetCursorPosition(1, 7)
@@ -274,27 +300,110 @@
             End Select
             'Console.Clear()
         Loop Until selection = "X"
+        Save()
+
+    End Sub
+
+    Sub Save()
+
+        FileOpen(1, "Companydata.txt", OpenMode.Output)
+        PrintLine(1, company.buisnessname)
+        PrintLine(1, company.ownersname)
+        PrintLine(1, company.number)
+        PrintLine(1, company.rate)
+        PrintLine(1, company.totalhours)
+        PrintLine(1, company.totalincome)
+        PrintLine(1, company.address)
+
+
+
+
+        FileClose(1)
+
 
     End Sub
 
 
+    Sub Load()
+
+        If IO.File.Exists("Companydata.txt") Then
+
+
+            'open file for reading
+            FileOpen(1, "Companydata.txt", OpenMode.Input)
+
+            'while we are not at the end of the file
+
+
+            company.buisnessname = LineInput(1)
+            company.ownersname = LineInput(1)
+            company.number = LineInput(1)
+            company.rate = LineInput(1)
+            company.totalhours = LineInput(1)
+            company.totalincome = LineInput(1)
+            company.address = LineInput(1)
+
+
+
+
+
+
+
+
+            FileClose(1)
+
+        End If
+
+    End Sub
     Sub title()
 
+        If IO.File.Exists("Companydata.txt") Then
+            Console.Clear()
+
+        Else
 
 
 
+            'Title
+            Console.SetCursorPosition(16, 0)
+            Console.WriteLine("Welcome to Fun With Lawns v0.2. New and Better!")
+            Console.SetCursorPosition(19, 2)
+            Console.WriteLine("Your all in one Lawn Management System ")
+            Console.SetCursorPosition(25, 8)
+            Console.WriteLine("Press and key to continue...")
 
-        'Title
-        Console.SetCursorPosition(16, 0)
-        Console.WriteLine("Welcome to Fun With Lawns v0.2. New and Better!")
-        Console.SetCursorPosition(19, 2)
-        Console.WriteLine("Your all in one Lawn Management System ")
-        Console.SetCursorPosition(25, 8)
-        Console.WriteLine("Press and key to continue...")
+            Console.ReadKey()
+            Console.Clear()
 
-        Console.ReadKey()
-        Console.Clear()
+            Console.Write("No company information has been found. We'll setup a profile before we begin")
+            Console.WriteLine()
+            Console.WriteLine("Press any key to continue")
+            Console.ReadKey()
+            Console.Clear()
+            Console.WriteLine("Here you need to enter the details for your new company profile")
 
+            Console.Write("Buisness Name: ")
+            company.buisnessname = Console.ReadLine
+
+            Console.Write("Owners Name: ")
+            company.ownersname = Console.ReadLine
+
+            Console.Write("Phone Number Name: ")
+            company.number = Console.ReadLine
+
+            Console.Write("Owners Address: ")
+            company.address = Console.ReadLine
+
+            Console.Write("Hourly rates: $ ")
+            company.rate = Console.ReadLine
+
+            Console.WriteLine()
+            Console.WriteLine("Setup is Complete")
+            Console.WriteLine()
+            Console.WriteLine("Press any key to continue....")
+            Console.ReadKey()
+        End If
+        menu()
     End Sub
   
 
@@ -309,6 +418,7 @@
 
 
     Sub Main()
+        Load()
         title()
         menu()
     End Sub

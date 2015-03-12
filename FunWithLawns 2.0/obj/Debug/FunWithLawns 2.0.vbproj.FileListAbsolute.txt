@@ -8,3 +8,12 @@ E:\VB.Net\FunWithLawns 2.0\FunWithLawns 2.0\obj\Debug\FunWithLawns 2.0.vbproj.Ge
 E:\VB.Net\FunWithLawns 2.0\FunWithLawns 2.0\obj\Debug\FunWithLawns 2.0.exe
 E:\VB.Net\FunWithLawns 2.0\FunWithLawns 2.0\obj\Debug\FunWithLawns 2.0.xml
 E:\VB.Net\FunWithLawns 2.0\FunWithLawns 2.0\obj\Debug\FunWithLawns 2.0.pdb
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\bin\Debug\FunWithLawns 2.0.exe.config
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\obj\Debug\FunWithLawns 2.0.exe
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\obj\Debug\FunWithLawns 2.0.xml
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\obj\Debug\FunWithLawns 2.0.pdb
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\bin\Debug\FunWithLawns 2.0.exe
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\bin\Debug\FunWithLawns 2.0.pdb
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\bin\Debug\FunWithLawns 2.0.xml
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\obj\Debug\FunWithLawns_2._0.Resources.resources
+E:\VB.Net\Fun with Lawns\FunWithLawns 2.0\obj\Debug\FunWithLawns 2.0.vbproj.GenerateResource.Cache
