@@ -14,7 +14,7 @@
 
         Console.Clear()
 
-        Console.WriteLine("Welcome " & company.buisnessname)
+        Console.WriteLine("Welcome " & company.ownersname)
         Console.WriteLine("=====================================================================")
         Console.WriteLine("Total completed hours " & company.totalhours)
 
@@ -53,7 +53,7 @@
 
         Next
         Console.WriteLine()
-        Console.Write("Enter the index of the client: ")
+        Console.Write("Enter the index of the client: (-1 to cancel) ")
         index = Console.ReadLine
         Return index
     End Function
@@ -152,12 +152,12 @@
 
                 Console.WriteLine("")
                 Console.WriteLine("")
-                Console.WriteLine("Press any key to continue")
-
+              
 
             Next
 
 
+            Console.WriteLine("Press any key to continue")
 
 
 
@@ -186,30 +186,43 @@
 
         Dim index As Integer = Getbookings()
         Console.Clear()
+        If index >= 0 And index < clients.Count Then
+            Console.WriteLine("Here's the Incomplete Bookings details")
+            Console.WriteLine("")
+            Console.WriteLine("Clients name : " & clients(index).name)
+            Console.WriteLine("")
+            Console.WriteLine("Clients address : " & clients(index).address)
+            Console.WriteLine("")
+            Console.WriteLine("Clients phone : " & clients(index).phone)
+            Console.WriteLine("")
+            Console.WriteLine("Date of booking : " & clients(index).dates)
+            Console.WriteLine("")
+            Console.WriteLine("Time of booking : " & clients(index).time)
+            Console.WriteLine("")
+            Console.WriteLine("")
+            Console.WriteLine("Enter any key to continue")
 
-        Console.WriteLine("Here's the Incomplete Bookings details")
-        Console.WriteLine("")
-        Console.WriteLine("Clients name : " & clients(index).name)
-        Console.WriteLine("")
-        Console.WriteLine("Clients address : " & clients(index).address)
-        Console.WriteLine("")
-        Console.WriteLine("Clients phone : " & clients(index).phone)
-        Console.WriteLine("")
-        Console.WriteLine("Date of booking : " & clients(index).dates)
-        Console.WriteLine("")
-        Console.WriteLine("Time of booking : " & clients(index).time)
-        Console.WriteLine("")
-        Console.WriteLine("")
-        Console.WriteLine("Enter any key to continue")
+            Console.ReadKey()
 
-        Console.ReadKey()
+        Else
 
+            Dim selection As Char
+            selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
+            Select Case selection
+                Case "-1"
+
+
+            End Select
+        End If
     End Sub
 
 
     Sub EditIncompletedetails()
+
         Console.Clear()
+
         Dim index As Integer = Getbookings()
+
 
         If index >= 0 And index < clients.Count Then
             'get their first name
@@ -229,7 +242,15 @@
             Console.Write("Time of Booking (hh:mm am/pm): ")
             clients(index).time = Console.ReadLine
 
-            Console.Clear()
+        Else
+            Dim selection As Char
+            selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
+            Select selection
+                Case "-1"
+
+                    
+            End Select
+
         End If
     End Sub
 
@@ -247,7 +268,7 @@
         If index >= 0 And index < clients.Count Then
 
             'remove the student they choose
-            Console.WriteLine("Do you want to remove this bookign Y/N")
+            Console.WriteLine("Do you want to remove this booking Y/N")
 
             Dim selection As Char
             selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
@@ -261,7 +282,7 @@
                 Case "N"
 
                     Console.Clear()
-                    Console.WriteLine("Booking Canceled")
+                    Console.WriteLine("Canceled")
                     Console.WriteLine("Press any key to continue")
                     Console.ReadKey()
             End Select
@@ -286,7 +307,7 @@
                 Case "Y"
 
                     Console.WriteLine("Booking Completed")
-                    'completedclients.Add(newClient)
+
                     Console.ReadLine()
                 Case "N"
 
@@ -333,7 +354,7 @@
             Console.SetCursorPosition(1, 18)
             Console.WriteLine("  (H) Complete a booking")
             Console.SetCursorPosition(1, 20)
-            Console.WriteLine("  (I) View Buisness car")
+            Console.WriteLine("  (I) View Buisness card")
             Console.SetCursorPosition(1, 22)
             Console.WriteLine("  (X) Exit")
 
