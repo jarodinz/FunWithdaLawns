@@ -31,7 +31,7 @@
         Public complete As Boolean
 
     End Class
-    ' Dim completedclients As New List(Of Client)
+
 
     Dim clients As New List(Of Client)
 
@@ -82,9 +82,7 @@
 
         Console.WriteLine("You added a Booking!")
 
-        'add to list
-
-        ' clients.Add(newClient)
+        
 
         Console.Clear()
 
@@ -131,36 +129,47 @@
 
     Sub ViewIncompletebookings()
 
-
+        Console.Clear()
         If clients.Count = 0 Then
             Console.Clear()
             Console.WriteLine("You have no bookings")
         Else
-            Dim index As Integer = Getbookings()
+
+            Dim index As Integer = 0
+
+            Console.WriteLine("Here's the Bookings currently in the program")
+            Console.WriteLine("")
+            Console.WriteLine("")
+
+            Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", "ID", "Clients Name", "Date", "Time")
+            Console.WriteLine("=========================================================")
 
 
-            Console.WriteLine("Here's all the Incomplete Bookings")
-            Console.WriteLine("Clients name :" & clients(index).name)
-            Console.WriteLine("Clients address :" & clients(index).address)
-            Console.WriteLine("Clients phone :" & clients(index).phone)
-            Console.WriteLine("Date of booking :" & clients(index).dates)
-            Console.WriteLine("Time of booking :" & clients(index).time)
+
+            For i = 0 To clients.Count - 1
+
+                Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", i, clients(i).name, clients(i).dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
+
+                Console.WriteLine("")
+                Console.WriteLine("")
+                Console.WriteLine("Press any key to continue")
+
+
+            Next
+
+
 
 
 
         End If
 
 
-        Console.ReadLine()
+        Console.ReadKey()
         Console.Clear()
     End Sub
 
     Sub ViewCompleteBookings()
-        ' Dim index As Integer = Getbookings()
-        '  Dim completedbooking As New Client
-        ' If index >= 0 And index < clients.Count Then
 
-        ' End If
 
 
 
@@ -172,6 +181,28 @@
 
 
     Sub IncompleteBookingsdetails()
+
+
+
+        Dim index As Integer = Getbookings()
+        Console.Clear()
+
+        Console.WriteLine("Here's the Incomplete Bookings details")
+        Console.WriteLine("")
+        Console.WriteLine("Clients name : " & clients(index).name)
+        Console.WriteLine("")
+        Console.WriteLine("Clients address : " & clients(index).address)
+        Console.WriteLine("")
+        Console.WriteLine("Clients phone : " & clients(index).phone)
+        Console.WriteLine("")
+        Console.WriteLine("Date of booking : " & clients(index).dates)
+        Console.WriteLine("")
+        Console.WriteLine("Time of booking : " & clients(index).time)
+        Console.WriteLine("")
+        Console.WriteLine("")
+        Console.WriteLine("Enter any key to continue")
+
+        Console.ReadKey()
 
     End Sub
 
@@ -205,6 +236,39 @@
 
 
     Sub RemoveBooking()
+
+        Console.Clear()
+        Console.WriteLine("Remove a Booking")
+        Console.WriteLine("")
+        Console.WriteLine("")
+
+        Dim index As Integer = Getbookings()
+
+        If index >= 0 And index < clients.Count Then
+
+            'remove the student they choose
+            Console.WriteLine("Do you want to remove this bookign Y/N")
+
+            Dim selection As Char
+            selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
+            Select Case selection
+                Case "Y"
+
+                    Console.WriteLine("Booking Removed")
+                    clients.RemoveAt(index)
+                    'completedclients.Add(newClient)
+                    Console.ReadLine()
+                Case "N"
+
+                    Console.Clear()
+                    Console.WriteLine("Booking Canceled")
+                    Console.WriteLine("Press any key to continue")
+                    Console.ReadKey()
+            End Select
+        End If
+
+
+        Console.WriteLine("Booking removed")
 
     End Sub
 
@@ -321,6 +385,23 @@
         FileClose(1)
 
 
+        FileOpen(1, "ClientsData.txt", OpenMode.Output)
+
+        For i = 0 To clients.Count - 1
+
+
+            'fill the file
+            PrintLine(1, clients(i).name)
+            PrintLine(1, clients(i).address)
+            PrintLine(1, clients(i).phone)
+            PrintLine(1, clients(i).dates)
+            PrintLine(1, clients(i).time)
+
+        Next
+
+        FileClose(1)
+
+
     End Sub
 
 
@@ -352,6 +433,41 @@
 
             FileClose(1)
 
+
+
+        End If
+
+
+        If IO.File.Exists("ClientsData.txt") Then
+
+
+            'open file for reading
+            FileOpen(1, "ClientsData.txt", OpenMode.Input)
+
+            'while we are not at the end of the file
+            While Not EOF(1)
+                Dim Newclient As New Client
+
+                Newclient.name = LineInput(1)
+                Newclient.address = LineInput(1)
+                Newclient.phone = LineInput(1)
+                Newclient.dates = LineInput(1)
+                Newclient.time = LineInput(1)
+
+
+
+
+
+                clients.Add(Newclient)
+
+
+            End While
+
+
+
+
+            'choose our file
+            FileClose(1)
         End If
 
     End Sub
