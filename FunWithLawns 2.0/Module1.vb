@@ -35,7 +35,7 @@
 
     Dim clients As New List(Of Client)
 
-    Function Getbookings()
+    Function Getbookings(complete As Boolean)
         Console.Clear()
 
         Dim index As Integer = 0
@@ -48,9 +48,9 @@
 
 
         For i = 0 To clients.Count - 1
-
-            Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", i, clients(i).name, clients(i).dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
-
+            If clients(i).complete = complete Then
+                Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", i, clients(i).name, clients(i).dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
+            End If
         Next
         Console.WriteLine()
         Console.Write("Enter the index of the client: (-1 to cancel) ")
@@ -96,23 +96,24 @@
         Console.WriteLine("Date of booking: " & newClient.dates)
         Console.WriteLine("Time of booking: " & newClient.time)
 
+      
+                Console.Write("Are these Correct (Y/N): ")
+                Dim selection As Char
+                selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
+                Select Case selection
+                    Case "Y"
+                        clients.Add(newClient)
+                        Console.WriteLine("Booking added")
 
-        Console.Write("Are these Correct (Y/N): ")
-        Dim selection As Char
-        selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
-        Select Case selection
-            Case "Y"
-                clients.Add(newClient)
-                Console.WriteLine("Booking added")
+                        Console.ReadLine()
+                    Case "N"
+                        clients.Remove(newClient)
+                        Console.Clear()
 
-                Console.ReadLine()
-            Case "N"
-                clients.Remove(newClient)
-                Console.Clear()
-
+            Case "-1"
         End Select
 
-        Console.Clear()
+                Console.Clear()
 
     End Sub
 
@@ -135,26 +136,12 @@
             Console.WriteLine("You have no bookings")
         Else
 
-            Dim index As Integer = 0
+            Dim index As Integer = Getbookings(False)
 
-            Console.WriteLine("Here's the Bookings currently in the program")
-            Console.WriteLine("")
-            Console.WriteLine("")
-
-            Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", "ID", "Clients Name", "Date", "Time")
-            Console.WriteLine("=========================================================")
-
-
-
-            For i = 0 To clients.Count - 1
-
-                Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", i, clients(i).name, clients(i).dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
-
-                Console.WriteLine("")
-                Console.WriteLine("")
+           
               
 
-            Next
+
 
 
             Console.WriteLine("Press any key to continue")
@@ -170,9 +157,28 @@
 
     Sub ViewCompleteBookings()
 
+        Console.Clear()
+
+        '     Dim index As Integer = 0
+
+        Console.WriteLine("Here's the Bookings currently in the program")
+        Console.WriteLine()
+        Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", "ID", "Clients Name", "Date", "Time")
+        Console.WriteLine("=========================================================")
 
 
 
+        For i = 0 To clients.Count - 1
+
+            If clients(i).complete = True Then
+                Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", i, clients(i).name, clients(i).dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
+            End If
+        Next
+        Console.WriteLine("Press any key to continue...")
+
+     
+
+        Console.ReadKey()
     End Sub
 
     Sub IncompleteBookingsNext7()
@@ -184,7 +190,7 @@
 
 
 
-        Dim index As Integer = Getbookings()
+        Dim index As Integer = Getbookings(False)
         Console.Clear()
         If index >= 0 And index < clients.Count Then
             Console.WriteLine("Here's the Incomplete Bookings details")
@@ -221,7 +227,7 @@
 
         Console.Clear()
 
-        Dim index As Integer = Getbookings()
+        Dim index As Integer = Getbookings(False)
 
 
         If index >= 0 And index < clients.Count Then
@@ -263,7 +269,7 @@
         Console.WriteLine("")
         Console.WriteLine("")
 
-        Dim index As Integer = Getbookings()
+        Dim index As Integer = Getbookings(False)
 
         If index >= 0 And index < clients.Count Then
 
@@ -296,7 +302,7 @@
 
 
     Sub CompleteBooking()
-        Dim index As Integer = Getbookings()
+        Dim index As Integer = Getbookings(False)
         Dim newClient As New Client
         If index >= 0 And index < clients.Count Then
 
@@ -304,9 +310,12 @@
             Dim selection As Char
             selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
             Select Case selection
+
                 Case "Y"
 
                     Console.WriteLine("Booking Completed")
+                    clients(index).complete = True
+
 
                     Console.ReadLine()
                 Case "N"
