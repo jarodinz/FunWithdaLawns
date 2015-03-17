@@ -194,7 +194,34 @@
     End Sub
 
     Sub IncompleteBookingsNext7()
+        Console.Clear()
 
+
+        If clients.Count = 0 Then
+            Console.Clear()
+            Console.WriteLine("You have no bookings")
+        Else
+
+
+            Console.WriteLine("Here's the Bookings currently in the program")
+            Console.WriteLine()
+            Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", "ID", "Clients Name", "Date", "Time")
+            Console.WriteLine("=========================================================")
+
+
+
+            For i = 0 To clients.Count - 1
+
+                If clients(i).complete = False And clients(i).dates <= Now.AddDays(7) And clients(i).dates >= Now Then
+                    Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", i, clients(i).name, clients(i).dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
+
+                End If
+            Next
+
+        End If
+
+        Console.WriteLine("Press any key to continue")
+        Console.ReadKey()
     End Sub
 
 
@@ -406,16 +433,16 @@
             End Select
             'Console.Clear()
         Loop Until selection = "X"
-
+        Save()
         Console.Clear()
         Dim savingword As String = "Saving"
         Dim Saving As Integer
         Dim finished As Boolean = False
         Dim rand As New Random
-        Dim delaycount As Integer = rand.Next(0, 100)
+        Dim delaycount As Integer = rand.Next(0, 30)
         Dim count As Integer = 0
 
-
+    
 
         While Not finished
 
@@ -423,7 +450,7 @@
             Threading.Thread.Sleep(20)
 
             Console.SetCursorPosition(Saving + 34, 10)
-            Console.BackgroundColor = ConsoleColor.Blue
+            Console.BackgroundColor = ConsoleColor.Red
 
             'put down 10 random numbers
             For i = Saving To 5
@@ -443,7 +470,7 @@
 
                 Saving += 1
                 count = 0
-                delaycount = rand.Next(0, 50)
+                delaycount = rand.Next(0, 30)
 
 
 
@@ -469,13 +496,13 @@
 
 
 
-        Console.SetCursorPosition(Saving + 34, 10)
-        Console.BackgroundColor = ConsoleColor.Blue
+        Console.SetCursorPosition(Saving + 28, 10)
+        Console.BackgroundColor = ConsoleColor.Green
 
         Console.WriteLine("GoodBye")
+        Threading.Thread.Sleep(1140)
 
-        Console.ReadKey()
-        Save()
+
     End Sub
 
     Sub Save()
