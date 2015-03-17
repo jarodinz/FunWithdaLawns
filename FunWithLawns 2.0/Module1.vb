@@ -18,10 +18,11 @@
         Console.WriteLine("=====================================================================")
         Console.WriteLine("Total completed hours " & company.totalhours)
 
-        Console.WriteLine("Total Income: " & company.totalincome)
-
+        Console.WriteLine("Total Income: " & FormatCurrency(company.totalincome))
+        Console.WriteLine("=====================================================================")
     End Sub
     Class Client
+
 
         Public name As String
         Public address As String
@@ -219,7 +220,8 @@
             Next
 
         End If
-
+        Console.WriteLine("")
+        Console.WriteLine("")
         Console.WriteLine("Press any key to continue")
         Console.ReadKey()
     End Sub
@@ -341,6 +343,7 @@
 
 
     Sub CompleteBooking()
+
         Dim index As Integer = Getbookings(False)
         Dim newClient As New Client
         If index >= 0 And index < clients.Count Then
@@ -352,8 +355,16 @@
 
                 Case "Y"
 
+                    
+
+                    Console.Write("How many hours did it take to do the job: ")
+                    company.totalhours += Console.ReadLine
+
+                    company.totalincome = company.totalhours * company.rate
+
                     Console.WriteLine("Booking Completed")
                     clients(index).complete = True
+
 
 
                     Console.ReadLine()
@@ -368,19 +379,27 @@
 
     Sub BuisnessCard()
         Console.Clear()
+
+
+        Console.SetCursorPosition(10, 10)
+        Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         Console.WriteLine("Owner: " & company.ownersname)
         Console.WriteLine("Company: " & company.buisnessname)
         Console.WriteLine("Phone Number: " & company.number)
         Console.WriteLine("Address: " & company.address)
 
-        Console.ReadLine()
+        Console.ReadKey()
     End Sub
     Sub menu()
         Dim selection As Char
 
         Do
+            Console.BackgroundColor = ConsoleColor.White
+            Console.ForegroundColor = ConsoleColor.Black
             Console.Clear()
+
             Companyinfo()
+
 
 
             Console.SetCursorPosition(1, 7)
@@ -614,8 +633,7 @@
             Console.Clear()
 
         Else
-
-
+         
 
             'Title
             Console.SetCursorPosition(16, 0)
