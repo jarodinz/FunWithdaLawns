@@ -60,6 +60,7 @@
 
     Sub AddBooking()
 
+
         Dim newClient As New Client
 
         Console.Clear()
@@ -110,7 +111,7 @@
                         clients.Remove(newClient)
                         Console.Clear()
 
-            Case "-1"
+
         End Select
 
                 Console.Clear()
@@ -136,19 +137,30 @@
             Console.WriteLine("You have no bookings")
         Else
 
-            Dim index As Integer = Getbookings(False)
+            ' Dim index As Integer = Getbookings(False)
 
-           
-              
-
-
-
-
-            Console.WriteLine("Press any key to continue")
+            Console.WriteLine("Here's the Bookings currently in the program")
+            Console.WriteLine()
+            Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", "ID", "Clients Name", "Date", "Time")
+            Console.WriteLine("=========================================================")
 
 
+
+            For i = 0 To clients.Count - 1
+
+                If clients(i).complete = False Then
+                    Console.WriteLine("{0,-5} {1,-25} {2,-15} {3,-15}", i, clients(i).name, clients(i).dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
+
+                End If
+            Next
 
         End If
+
+        Console.WriteLine("Press any key to continue")
+
+
+
+
 
 
         Console.ReadKey()
@@ -365,7 +377,7 @@
             Console.SetCursorPosition(1, 20)
             Console.WriteLine("  (I) View Buisness card")
             Console.SetCursorPosition(1, 22)
-            Console.WriteLine("  (X) Exit")
+            Console.WriteLine("  (X) Save and Exit")
 
 
 
@@ -394,8 +406,76 @@
             End Select
             'Console.Clear()
         Loop Until selection = "X"
-        Save()
 
+        Console.Clear()
+        Dim savingword As String = "Saving"
+        Dim Saving As Integer
+        Dim finished As Boolean = False
+        Dim rand As New Random
+        Dim delaycount As Integer = rand.Next(0, 100)
+        Dim count As Integer = 0
+
+
+
+        While Not finished
+
+            'slow down
+            Threading.Thread.Sleep(20)
+
+            Console.SetCursorPosition(Saving + 34, 10)
+            Console.BackgroundColor = ConsoleColor.Blue
+
+            'put down 10 random numbers
+            For i = Saving To 5
+                Console.Write(savingword(i))
+
+            Next
+
+            count += 1
+
+            'check if we hit the threshold
+
+            If count = delaycount Then
+                Console.BackgroundColor = ConsoleColor.Green
+                Console.SetCursorPosition(Saving + 34, 10)
+                Console.Write(savingword(Saving))
+
+
+                Saving += 1
+                count = 0
+                delaycount = rand.Next(0, 50)
+
+
+
+            End If
+
+            If Saving = 6 Then
+                finished = True
+                Console.BackgroundColor = ConsoleColor.Black
+            End If
+
+
+
+
+
+        End While
+
+
+
+
+
+
+        Console.Clear()
+
+
+
+        Console.SetCursorPosition(Saving + 34, 10)
+        Console.BackgroundColor = ConsoleColor.Blue
+
+        Console.WriteLine("GoodBye")
+
+        Console.ReadKey()
+        Save()
     End Sub
 
     Sub Save()
@@ -549,7 +629,7 @@
             Console.WriteLine("Press any key to continue....")
             Console.ReadKey()
         End If
-        menu()
+
     End Sub
   
 
