@@ -3,18 +3,34 @@ john johnson
  123456789 
 12/12/2012 
 12:12:00 PM 
+False
 jarrad pringle
 2 windarra place
  428086489 
 12/12/2012 
 12:12:00 PM 
+False
 jarod inzitari
 11 bursaria pl
  427099147 
 23/03/2015 
 12/12/2012 
+True
 Chris Seymour
 11 wolgan place
  41234567 
 12/12/2012 
 12:12:00 PM 
+False
+Max Arkley-Smith
+11 ace ventura diggity
+ 1234 
+25/03/2015 
+12:12:00 AM 
+False
+coolio
+11 ace place
+ 123456789 
+19/03/2015 
+6:08:00 PM 
+True
